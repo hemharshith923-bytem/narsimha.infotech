@@ -1,0 +1,901 @@
+import { Helmet } from "react-helmet-async";
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { toast } from "sonner";
+import {
+  Menu,
+  X,
+  ArrowRight,
+  Shield,
+  Cloud,
+  Smartphone,
+  CheckCircle,
+  Target,
+  Eye,
+  Linkedin,
+  Mail,
+  Check,
+  Star,
+  MapPin,
+  Clock,
+  Send,
+  ArrowUp,
+} from "lucide-react";
+import logo from "@/assets/logo.jpg";
+
+// ==================== HEADER ====================
+const Header = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const navLinks = [
+    { href: "#about", label: "About" },
+    { href: "#services", label: "Services" },
+    { href: "#team", label: "Team" },
+    { href: "#pricing", label: "Pricing" },
+    { href: "#contact", label: "Contact" },
+  ];
+
+  return (
+    <header className="fixed top-0 left-0 right-0 z-50 bg-card/95 backdrop-blur-md shadow-card">
+      <div className="section-container">
+        <div className="flex items-center justify-between h-16 md:h-20">
+          <a href="#" className="flex items-center gap-3">
+            <img src={logo} alt="Narsimha Infotech Logo" className="w-12 h-12 rounded-lg object-cover" />
+            <div className="hidden sm:block">
+              <h1 className="font-bold text-lg text-foreground">Narsimha Infotech</h1>
+              <p className="text-xs text-muted-foreground -mt-0.5">Future-Tech Solutions</p>
+            </div>
+          </a>
+
+          <nav className="hidden lg:flex items-center gap-8">
+            {navLinks.map((link) => (
+              <a
+                key={link.href}
+                href={link.href}
+                className="text-foreground/80 hover:text-primary font-medium transition-all duration-300"
+              >
+                {link.label}
+              </a>
+            ))}
+          </nav>
+
+          <div className="hidden md:block">
+            <Button variant="gold" size="lg" asChild>
+              <a href="#contact">Get Started</a>
+            </Button>
+          </div>
+
+          <button
+            className="lg:hidden p-2 text-foreground"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            aria-label="Toggle menu"
+          >
+            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
+        </div>
+
+        {isMenuOpen && (
+          <div className="lg:hidden pb-6 animate-fade-in">
+            <nav className="flex flex-col gap-4">
+              {navLinks.map((link) => (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  className="text-foreground/80 hover:text-primary font-medium py-2 transition-all duration-300"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  {link.label}
+                </a>
+              ))}
+              <Button variant="gold" className="mt-2" asChild>
+                <a href="#contact">Get Started</a>
+              </Button>
+            </nav>
+          </div>
+        )}
+      </div>
+    </header>
+  );
+};
+
+// ==================== HERO SECTION ====================
+const HeroSection = () => {
+  return (
+    <section className="relative min-h-screen flex items-center bg-hero-gradient overflow-hidden">
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute top-20 right-10 w-72 h-72 bg-accent/10 rounded-full blur-3xl animate-float" />
+        <div className="absolute bottom-20 left-10 w-96 h-96 bg-crimson/10 rounded-full blur-3xl animate-float" style={{ animationDelay: "1s" }} />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary-foreground/5 rounded-full blur-3xl" />
+      </div>
+
+      <div className="absolute inset-0 opacity-10" style={{
+        backgroundImage: `linear-gradient(hsl(var(--primary-foreground) / 0.1) 1px, transparent 1px),
+                          linear-gradient(90deg, hsl(var(--primary-foreground) / 0.1) 1px, transparent 1px)`,
+        backgroundSize: '50px 50px'
+      }} />
+
+      <div className="section-container relative z-10 pt-24 pb-16">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+          <div className="text-center lg:text-left">
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary-foreground/10 backdrop-blur-sm rounded-full border border-primary-foreground/20 mb-6 animate-fade-in">
+              <span className="w-2 h-2 bg-accent rounded-full animate-pulse" />
+              <span className="text-sm text-primary-foreground/90 font-medium">Trusted IT Partner</span>
+            </div>
+
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold text-primary-foreground leading-tight mb-6 animate-fade-in" style={{ animationDelay: "0.1s" }}>
+              Rooted in{" "}
+              <span className="text-accent">Reliability</span>.{" "}
+              <br className="hidden sm:block" />
+              Focused on{" "}
+              <span className="text-accent">Future-Tech</span>.
+            </h1>
+
+            <p className="text-lg sm:text-xl text-primary-foreground/80 max-w-xl mx-auto lg:mx-0 mb-8 animate-fade-in" style={{ animationDelay: "0.2s" }}>
+              Empowering businesses with secure, scalable, and custom technology solutions that drive growth, efficiency, and innovation.
+            </p>
+
+            <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start animate-fade-in" style={{ animationDelay: "0.3s" }}>
+              <Button variant="hero" size="xl" className="animate-pulse-glow" asChild>
+                <a href="#contact">
+                  Start Your Project
+                  <ArrowRight className="ml-2" />
+                </a>
+              </Button>
+              <Button variant="heroOutline" size="xl" asChild>
+                <a href="#services">Explore Services</a>
+              </Button>
+            </div>
+
+            <div className="grid grid-cols-3 gap-6 mt-12 pt-8 border-t border-primary-foreground/20 animate-fade-in" style={{ animationDelay: "0.4s" }}>
+              <div>
+                <div className="text-2xl sm:text-3xl font-bold text-accent">85%</div>
+                <div className="text-xs sm:text-sm text-primary-foreground/70">Success Rate</div>
+              </div>
+              <div>
+                <div className="text-2xl sm:text-3xl font-bold text-accent">15+</div>
+                <div className="text-xs sm:text-sm text-primary-foreground/70">Years Experience</div>
+              </div>
+              <div>
+                <div className="text-2xl sm:text-3xl font-bold text-accent">24/7</div>
+                <div className="text-xs sm:text-sm text-primary-foreground/70">Global Support</div>
+              </div>
+            </div>
+          </div>
+
+          <div className="hidden lg:flex items-center justify-center relative">
+            <div className="relative w-full max-w-md aspect-square">
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-36 h-36 bg-primary-foreground/10 backdrop-blur-md rounded-2xl border border-primary-foreground/20 flex items-center justify-center shadow-elevated animate-float overflow-hidden">
+                <img src={logo} alt="Narsimha Infotech Logo" className="w-full h-full object-cover" />
+              </div>
+
+              <div className="absolute top-0 left-1/2 -translate-x-1/2 w-20 h-20 bg-primary-foreground/10 backdrop-blur-sm rounded-xl border border-primary-foreground/20 flex items-center justify-center animate-fade-in" style={{ animationDelay: "0.5s" }}>
+                <Cloud className="w-10 h-10 text-accent" />
+              </div>
+              <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-20 h-20 bg-primary-foreground/10 backdrop-blur-sm rounded-xl border border-primary-foreground/20 flex items-center justify-center animate-fade-in" style={{ animationDelay: "0.6s" }}>
+                <Smartphone className="w-10 h-10 text-accent" />
+              </div>
+              <div className="absolute top-1/2 left-0 -translate-y-1/2 w-20 h-20 bg-primary-foreground/10 backdrop-blur-sm rounded-xl border border-primary-foreground/20 flex items-center justify-center animate-fade-in" style={{ animationDelay: "0.7s" }}>
+                <Shield className="w-10 h-10 text-accent" />
+              </div>
+
+              <svg className="absolute inset-0 w-full h-full" viewBox="0 0 400 400">
+                <circle cx="200" cy="200" r="150" fill="none" stroke="hsl(var(--primary-foreground) / 0.1)" strokeWidth="1" strokeDasharray="8 8" />
+                <circle cx="200" cy="200" r="100" fill="none" stroke="hsl(var(--primary-foreground) / 0.15)" strokeWidth="1" />
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="absolute bottom-0 left-0 right-0">
+        <svg viewBox="0 0 1440 100" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full">
+          <path d="M0 50L48 45.7C96 41.3 192 32.7 288 30C384 27.3 480 30.7 576 38.3C672 46 768 58 864 58.3C960 58.7 1056 47.3 1152 41.7C1248 36 1344 36 1392 36L1440 36V100H1392C1344 100 1248 100 1152 100C1056 100 960 100 864 100C768 100 672 100 576 100C480 100 384 100 288 100C192 100 96 100 48 100H0V50Z" fill="hsl(var(--background))" />
+        </svg>
+      </div>
+    </section>
+  );
+};
+
+// ==================== ABOUT SECTION ====================
+const AboutSection = () => {
+  const values = [
+    "Integrity and trust",
+    "Innovation and scalability",
+    "Client-first commitment",
+    "Reliability and technical excellence",
+  ];
+
+  return (
+    <section id="about" className="section-padding bg-background">
+      <div className="section-container">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+          <div>
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-secondary rounded-full mb-6">
+              <span className="text-sm text-primary font-medium">About Us</span>
+            </div>
+
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-6">
+              Your Trusted Partner in{" "}
+              <span className="text-primary">Digital Transformation</span>
+            </h2>
+
+            <p className="text-lg text-muted-foreground mb-8">
+              Narsimha Infotech is a professional IT solutions and web development company dedicated to helping businesses digitally transform. We specialize in building secure, scalable, and custom technology solutions that drive growth, efficiency, and innovation.
+            </p>
+
+            <div className="grid sm:grid-cols-2 gap-4 mb-8">
+              {values.map((value, index) => (
+                <div key={index} className="flex items-center gap-3">
+                  <CheckCircle className="w-5 h-5 text-accent flex-shrink-0" />
+                  <span className="text-foreground font-medium">{value}</span>
+                </div>
+              ))}
+            </div>
+
+            <p className="text-muted-foreground">
+              <span className="font-semibold text-foreground">Founded by:</span> Sushrut P and Achyuta K (Founding Investors)
+            </p>
+          </div>
+
+          <div className="space-y-6">
+            <div className="bg-card rounded-xl p-8 shadow-card border-accent-left card-hover">
+              <div className="flex items-center gap-4 mb-4">
+                <div className="w-12 h-12 bg-secondary rounded-lg flex items-center justify-center">
+                  <Target className="w-6 h-6 text-primary" />
+                </div>
+                <h3 className="text-xl font-bold text-foreground">Our Mission</h3>
+              </div>
+              <p className="text-muted-foreground leading-relaxed">
+                To craft scalable, secure, and tailored IT solutions that empower businesses to grow and compete efficiently in the digital world.
+              </p>
+            </div>
+
+            <div className="bg-card rounded-xl p-8 shadow-card border-crimson-left card-hover">
+              <div className="flex items-center gap-4 mb-4">
+                <div className="w-12 h-12 bg-crimson/10 rounded-lg flex items-center justify-center">
+                  <Eye className="w-6 h-6 text-crimson" />
+                </div>
+                <h3 className="text-xl font-bold text-foreground">Our Vision</h3>
+              </div>
+              <p className="text-muted-foreground leading-relaxed">
+                To be recognized as a leader in reliable digital transformation, rooted in deep technical expertise and a client-first approach.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+// ==================== SERVICES SECTION ====================
+const ServicesSection = () => {
+  const services = [
+    {
+      icon: Cloud,
+      title: "Cloud & Infrastructure",
+      description: "Secure, scalable, and resilient cloud environments with hosting, backups, and performance optimization.",
+      features: ["Cloud Migration", "Managed Hosting", "Backup Solutions", "Performance Optimization"],
+      color: "primary" as const,
+    },
+    {
+      icon: Smartphone,
+      title: "Application Development",
+      description: "Custom software solutions for web and mobile focused on UI/UX, efficiency, and cross-platform compatibility.",
+      features: ["Web Applications", "Mobile Apps", "UI/UX Design", "Cross-Platform Solutions"],
+      color: "accent" as const,
+    },
+    {
+      icon: Shield,
+      title: "Cybersecurity",
+      description: "Protect your digital assets with proactive security measures, consulting, and implementation of advanced solutions.",
+      features: ["Security Audits", "Threat Protection", "Compliance", "Security Consulting"],
+      color: "crimson" as const,
+    },
+  ];
+
+  const colorClasses = {
+    primary: {
+      bg: "bg-primary/10",
+      icon: "text-primary",
+      hover: "group-hover:bg-primary group-hover:text-primary-foreground",
+    },
+    accent: {
+      bg: "bg-accent/10",
+      icon: "text-accent",
+      hover: "group-hover:bg-accent group-hover:text-accent-foreground",
+    },
+    crimson: {
+      bg: "bg-crimson/10",
+      icon: "text-crimson",
+      hover: "group-hover:bg-crimson group-hover:text-crimson-foreground",
+    },
+  };
+
+  return (
+    <section id="services" className="section-padding bg-secondary/50">
+      <div className="section-container">
+        <div className="text-center max-w-3xl mx-auto mb-16">
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-card rounded-full shadow-card mb-6">
+            <span className="text-sm text-primary font-medium">Our Services</span>
+          </div>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-6">
+            Comprehensive IT Solutions for{" "}
+            <span className="text-primary">Modern Business</span>
+          </h2>
+          <p className="text-lg text-muted-foreground">
+            We deliver end-to-end digital transformation services, from cloud infrastructure to cybersecurity, helping your business thrive in the digital age.
+          </p>
+        </div>
+
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {services.map((service, index) => {
+            const colors = colorClasses[service.color];
+            return (
+              <div
+                key={index}
+                className="group bg-card rounded-2xl p-8 shadow-card card-hover border border-border"
+              >
+                <div className={`w-16 h-16 ${colors.bg} rounded-xl flex items-center justify-center mb-6 transition-all duration-300 ${colors.hover}`}>
+                  <service.icon className={`w-8 h-8 ${colors.icon} transition-all duration-300 group-hover:text-inherit`} />
+                </div>
+
+                <h3 className="text-xl font-bold text-foreground mb-4">{service.title}</h3>
+                <p className="text-muted-foreground mb-6">{service.description}</p>
+
+                <ul className="space-y-3 mb-6">
+                  {service.features.map((feature, fIndex) => (
+                    <li key={fIndex} className="flex items-center gap-3 text-sm text-foreground">
+                      <div className={`w-1.5 h-1.5 rounded-full ${colors.bg.replace('/10', '')}`} />
+                      {feature}
+                    </li>
+                  ))}
+                </ul>
+
+                <Button variant="ghost" className="group/btn p-0 h-auto text-primary hover:text-primary/80">
+                  Learn More
+                  <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover/btn:translate-x-1" />
+                </Button>
+              </div>
+            );
+          })}
+        </div>
+
+        <div className="mt-12 text-center">
+          <p className="text-muted-foreground mb-4">
+            Additional services include web design, digital transformation strategy, and ongoing maintenance & support.
+          </p>
+          <Button variant="gold" size="lg" asChild>
+            <a href="#contact">
+              Discuss Your Project
+              <ArrowRight className="ml-2 w-4 h-4" />
+            </a>
+          </Button>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+// ==================== TEAM SECTION ====================
+const TeamSection = () => {
+  const team = [
+    {
+      name: "J Hemharshith",
+      role: "Lead Web Developer",
+      expertise: "Front-end frameworks, UI/UX",
+      contribution: "Designs efficient, user-friendly digital interfaces",
+      initials: "JH",
+      color: "primary" as const,
+    },
+    {
+      name: "Vikas GS",
+      role: "Senior Web Developer",
+      expertise: "Back-end architecture, optimization",
+      contribution: "Builds fast, reliable, and scalable applications",
+      initials: "VG",
+      color: "accent" as const,
+    },
+    {
+      name: "Achyuta K",
+      role: "Chief Investor & Strategist",
+      expertise: "Finance, business strategy",
+      contribution: "Provides funding and long-term strategic guidance",
+      initials: "AK",
+      color: "crimson" as const,
+    },
+    {
+      name: "Sushrut P",
+      role: "Founding Investor & Partner",
+      expertise: "Technology vision, investment",
+      contribution: "Guides technology strategy and ensures platform sustainability",
+      initials: "SP",
+      color: "primary" as const,
+    },
+  ];
+
+  const colorClasses = {
+    primary: "bg-hero-gradient",
+    accent: "bg-gold-gradient text-primary",
+    crimson: "bg-crimson",
+  };
+
+  return (
+    <section id="team" className="section-padding bg-background">
+      <div className="section-container">
+        <div className="text-center max-w-3xl mx-auto mb-16">
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-secondary rounded-full mb-6">
+            <span className="text-sm text-primary font-medium">Our Team</span>
+          </div>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-6">
+            Meet the <span className="text-primary">Experts</span> Behind Your Success
+          </h2>
+          <p className="text-lg text-muted-foreground">
+            Our team combines technical excellence with strategic vision to deliver exceptional results for every client.
+          </p>
+        </div>
+
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+          {team.map((member, index) => (
+            <div
+              key={index}
+              className="group bg-card rounded-2xl overflow-hidden shadow-card card-hover border border-border"
+            >
+              <div className="relative h-48 bg-secondary/50 flex items-center justify-center">
+                <div className={`w-24 h-24 ${colorClasses[member.color]} rounded-full flex items-center justify-center text-primary-foreground font-bold text-2xl shadow-elevated transition-transform group-hover:scale-110`}>
+                  {member.initials}
+                </div>
+                
+                <div className="absolute inset-0 bg-primary/80 flex items-center justify-center gap-4 opacity-0 group-hover:opacity-100 transition-opacity">
+                  <a
+                    href="#"
+                    className="w-10 h-10 bg-primary-foreground/20 rounded-full flex items-center justify-center text-primary-foreground hover:bg-primary-foreground/30 transition-colors"
+                    aria-label={`${member.name}'s LinkedIn`}
+                  >
+                    <Linkedin className="w-5 h-5" />
+                  </a>
+                  <a
+                    href="#contact"
+                    className="w-10 h-10 bg-primary-foreground/20 rounded-full flex items-center justify-center text-primary-foreground hover:bg-primary-foreground/30 transition-colors"
+                    aria-label={`Email ${member.name}`}
+                  >
+                    <Mail className="w-5 h-5" />
+                  </a>
+                </div>
+              </div>
+
+              <div className="p-6">
+                <h3 className="text-lg font-bold text-foreground mb-1">{member.name}</h3>
+                <p className="text-sm text-accent font-medium mb-3">{member.role}</p>
+                <p className="text-sm text-muted-foreground mb-2">
+                  <span className="font-medium text-foreground">Expertise:</span> {member.expertise}
+                </p>
+                <p className="text-sm text-muted-foreground">
+                  {member.contribution}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
+// ==================== PRICING SECTION ====================
+const PricingSection = () => {
+  const plans = [
+    {
+      name: "Basic",
+      price: "₹3,000",
+      renewal: "₹2,400/year renewal",
+      description: "Perfect for individuals and small businesses starting online",
+      features: [
+        "1-page website",
+        "Domain + Hosting included",
+        "Free SSL Certificate",
+        "Mobile responsive design",
+        "Basic support",
+      ],
+      highlighted: false,
+    },
+    {
+      name: "Standard",
+      price: "₹8,000 – ₹12,000",
+      renewal: "₹3,000 – ₹3,500/year renewal",
+      description: "Ideal for growing businesses needing more functionality",
+      features: [
+        "4–6 pages website",
+        "Contact form integration",
+        "Image gallery",
+        "WhatsApp button",
+        "Free SSL Certificate",
+        "Basic SEO optimization",
+        "Priority support",
+      ],
+      highlighted: true,
+    },
+    {
+      name: "Premium",
+      price: "₹15,000 – ₹25,000",
+      renewal: "₹5,000 – ₹6,000/year renewal",
+      description: "Complete solution for businesses needing advanced features",
+      features: [
+        "All Standard features",
+        "Online ordering/booking system",
+        "Fast cloud hosting",
+        "Advanced backup & security",
+        "Performance optimization",
+        "Analytics integration",
+        "Dedicated support",
+      ],
+      highlighted: false,
+    },
+  ];
+
+  return (
+    <section id="pricing" className="section-padding bg-secondary/50">
+      <div className="section-container">
+        <div className="text-center max-w-3xl mx-auto mb-16">
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-card rounded-full shadow-card mb-6">
+            <span className="text-sm text-primary font-medium">Pricing Plans</span>
+          </div>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-6">
+            Transparent Pricing for{" "}
+            <span className="text-primary">Every Need</span>
+          </h2>
+          <p className="text-lg text-muted-foreground">
+            Choose the perfect plan for your business. All plans include one year of hosting and support.
+          </p>
+        </div>
+
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 items-start">
+          {plans.map((plan, index) => (
+            <div
+              key={index}
+              className={`relative bg-card rounded-2xl p-8 shadow-card card-hover border ${
+                plan.highlighted
+                  ? "border-accent shadow-gold scale-105 lg:scale-110"
+                  : "border-border"
+              }`}
+            >
+              {plan.highlighted && (
+                <div className="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1 bg-gold-gradient text-primary text-sm font-semibold rounded-full flex items-center gap-1">
+                  <Star className="w-4 h-4" />
+                  Most Popular
+                </div>
+              )}
+
+              <div className="text-center mb-8">
+                <h3 className="text-2xl font-bold text-foreground mb-2">{plan.name}</h3>
+                <p className="text-muted-foreground text-sm mb-4">{plan.description}</p>
+                <div className="mb-2">
+                  <span className="text-4xl font-bold text-foreground">{plan.price}</span>
+                  <span className="text-muted-foreground">/first year</span>
+                </div>
+                <p className="text-sm text-muted-foreground">{plan.renewal}</p>
+              </div>
+
+              <ul className="space-y-4 mb-8">
+                {plan.features.map((feature, fIndex) => (
+                  <li key={fIndex} className="flex items-start gap-3">
+                    <Check className={`w-5 h-5 flex-shrink-0 mt-0.5 ${
+                      plan.highlighted ? "text-accent" : "text-primary"
+                    }`} />
+                    <span className="text-foreground">{feature}</span>
+                  </li>
+                ))}
+              </ul>
+
+              <Button
+                variant={plan.highlighted ? "gold" : "default"}
+                className="w-full"
+                size="lg"
+                asChild
+              >
+                <a href="#contact">Get Started</a>
+              </Button>
+            </div>
+          ))}
+        </div>
+
+        <p className="text-center text-muted-foreground mt-12 max-w-2xl mx-auto">
+          Need a custom solution? Contact us for enterprise pricing and tailored packages that fit your specific requirements.
+        </p>
+      </div>
+    </section>
+  );
+};
+
+// ==================== CONTACT SECTION ====================
+const ContactSection = () => {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    subject: "",
+    message: "",
+  });
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    toast.success("Message sent successfully! We'll get back to you soon.");
+    setFormData({ name: "", email: "", subject: "", message: "" });
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const contactInfo = [
+    {
+      icon: Mail,
+      title: "Email Us",
+      details: "narsimha.infotech.official@gmail.com",
+      subtext: "We'll respond within 24 hours",
+    },
+    {
+      icon: MapPin,
+      title: "Location",
+      details: "India",
+      subtext: "Serving clients globally",
+    },
+    {
+      icon: Clock,
+      title: "Business Hours",
+      details: "24/7 Support",
+      subtext: "Always available for you",
+    },
+  ];
+
+  return (
+    <section id="contact" className="section-padding bg-background">
+      <div className="section-container">
+        <div className="text-center max-w-3xl mx-auto mb-16">
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-secondary rounded-full mb-6">
+            <span className="text-sm text-primary font-medium">Contact Us</span>
+          </div>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-6">
+            Ready to Start Your{" "}
+            <span className="text-primary">Digital Journey</span>?
+          </h2>
+          <p className="text-lg text-muted-foreground">
+            Get in touch with us to discuss your project requirements and discover how we can help transform your business.
+          </p>
+        </div>
+
+        <div className="grid lg:grid-cols-5 gap-12">
+          <div className="lg:col-span-2 space-y-6">
+            {contactInfo.map((info, index) => (
+              <div
+                key={index}
+                className="flex items-start gap-4 p-6 bg-card rounded-xl shadow-card border border-border card-hover"
+              >
+                <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                  <info.icon className="w-6 h-6 text-primary" />
+                </div>
+                <div>
+                  <h3 className="font-bold text-foreground mb-1">{info.title}</h3>
+                  <p className="text-foreground font-medium">{info.details}</p>
+                  <p className="text-sm text-muted-foreground">{info.subtext}</p>
+                </div>
+              </div>
+            ))}
+
+            <div className="p-6 bg-hero-gradient rounded-xl text-primary-foreground">
+              <h3 className="font-bold text-lg mb-2">Thought Leadership</h3>
+              <p className="text-primary-foreground/80 text-sm mb-4">
+                "The Future of AI in Enterprise: A Narsimha Viewpoint" – Focusing on integrating generative AI to redefine operational efficiency.
+              </p>
+              <Button variant="heroOutline" size="sm">
+                Read Our Insights
+              </Button>
+            </div>
+          </div>
+
+          <div className="lg:col-span-3">
+            <form onSubmit={handleSubmit} className="bg-card rounded-2xl p-8 shadow-card border border-border">
+              <div className="grid sm:grid-cols-2 gap-6 mb-6">
+                <div>
+                  <label htmlFor="name" className="block text-sm font-medium text-foreground mb-2">
+                    Your Name
+                  </label>
+                  <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleChange}
+                    required
+                    className="w-full px-4 py-3 bg-background border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-colors text-foreground"
+                    placeholder="John Doe"
+                  />
+                </div>
+                <div>
+                  <label htmlFor="email" className="block text-sm font-medium text-foreground mb-2">
+                    Email Address
+                  </label>
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    required
+                    className="w-full px-4 py-3 bg-background border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-colors text-foreground"
+                    placeholder="john@example.com"
+                  />
+                </div>
+              </div>
+
+              <div className="mb-6">
+                <label htmlFor="subject" className="block text-sm font-medium text-foreground mb-2">
+                  Subject
+                </label>
+                <input
+                  type="text"
+                  id="subject"
+                  name="subject"
+                  value={formData.subject}
+                  onChange={handleChange}
+                  required
+                  className="w-full px-4 py-3 bg-background border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-colors text-foreground"
+                  placeholder="How can we help you?"
+                />
+              </div>
+
+              <div className="mb-6">
+                <label htmlFor="message" className="block text-sm font-medium text-foreground mb-2">
+                  Message
+                </label>
+                <textarea
+                  id="message"
+                  name="message"
+                  value={formData.message}
+                  onChange={handleChange}
+                  required
+                  rows={5}
+                  className="w-full px-4 py-3 bg-background border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-colors text-foreground resize-none"
+                  placeholder="Tell us about your project..."
+                />
+              </div>
+
+              <Button type="submit" variant="gold" size="xl" className="w-full">
+                Send Message
+                <Send className="ml-2 w-5 h-5" />
+              </Button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+// ==================== FOOTER ====================
+const Footer = () => {
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const links = {
+    services: [
+      { label: "Cloud Solutions", href: "#services" },
+      { label: "App Development", href: "#services" },
+      { label: "Cybersecurity", href: "#services" },
+      { label: "Web Design", href: "#services" },
+    ],
+    company: [
+      { label: "About Us", href: "#about" },
+      { label: "Our Team", href: "#team" },
+      { label: "Pricing", href: "#pricing" },
+      { label: "Contact", href: "#contact" },
+    ],
+  };
+
+  return (
+    <footer className="bg-primary text-primary-foreground">
+      <div className="section-container py-16">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12">
+          <div className="lg:col-span-2">
+            <div className="flex items-center gap-3 mb-6">
+              <img src={logo} alt="Narsimha Infotech Logo" className="w-14 h-14 rounded-lg object-cover" />
+              <div>
+                <h3 className="font-bold text-xl">Narsimha Infotech</h3>
+                <p className="text-primary-foreground/70 text-sm">Future-Tech Solutions</p>
+              </div>
+            </div>
+            <p className="text-primary-foreground/80 max-w-md mb-6">
+              Rooted in Reliability. Focused on Future-Tech. Your trusted partner for digital transformation, web development, and enterprise solutions.
+            </p>
+            <a
+              href="mailto:narsimha.infotech.official@gmail.com"
+              className="text-accent hover:text-accent/80 transition-colors font-medium"
+            >
+              narsimha.infotech.official@gmail.com
+            </a>
+          </div>
+
+          <div>
+            <h4 className="font-bold text-lg mb-6">Services</h4>
+            <ul className="space-y-3">
+              {links.services.map((link, index) => (
+                <li key={index}>
+                  <a
+                    href={link.href}
+                    className="text-primary-foreground/70 hover:text-accent transition-colors"
+                  >
+                    {link.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div>
+            <h4 className="font-bold text-lg mb-6">Company</h4>
+            <ul className="space-y-3">
+              {links.company.map((link, index) => (
+                <li key={index}>
+                  <a
+                    href={link.href}
+                    className="text-primary-foreground/70 hover:text-accent transition-colors"
+                  >
+                    {link.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+
+        <div className="mt-12 pt-8 border-t border-primary-foreground/20 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <p className="text-primary-foreground/60 text-sm">
+            © {new Date().getFullYear()} Narsimha Infotech. All rights reserved.
+          </p>
+          <button
+            onClick={scrollToTop}
+            className="w-10 h-10 bg-primary-foreground/10 hover:bg-accent rounded-full flex items-center justify-center transition-colors group"
+            aria-label="Scroll to top"
+          >
+            <ArrowUp className="w-5 h-5 text-primary-foreground group-hover:text-primary transition-colors" />
+          </button>
+        </div>
+      </div>
+    </footer>
+  );
+};
+
+// ==================== MAIN INDEX PAGE ====================
+const Index = () => {
+  return (
+    <>
+      <Helmet>
+        <title>Narsimha Infotech – Rooted in Reliability. Focused on Future-Tech.</title>
+        <meta
+          name="description"
+          content="Narsimha Infotech is a professional IT solutions company specializing in digital transformation, web development, cloud infrastructure, and cybersecurity. Get secure, scalable, and custom technology solutions."
+        />
+        <meta
+          name="keywords"
+          content="IT solutions, web development, digital transformation, cloud solutions, cybersecurity, enterprise software, India"
+        />
+        <link rel="canonical" href="https://narsimhainfotech.com" />
+      </Helmet>
+
+      <div className="min-h-screen bg-background">
+        <Header />
+        <main>
+          <HeroSection />
+          <AboutSection />
+          <ServicesSection />
+          <TeamSection />
+          <PricingSection />
+          <ContactSection />
+        </main>
+        <Footer />
+      </div>
+    </>
+  );
+};
+
+export default Index;
